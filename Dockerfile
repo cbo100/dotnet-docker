@@ -26,4 +26,4 @@ ADD . $APP_HOME
 RUN chown -R builduser:buildusers $APP_HOME
 
 # Change to the app user.
-USER app
+USER builduser
