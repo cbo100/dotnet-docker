@@ -5,7 +5,7 @@ RUN mkdir -p /home/builduser
 
 # Create an app user so our program doesn't run as root.
 RUN groupadd -g 1000 -r buildusers &&\
-    useradd -u 1000 -r -g builduser -d /home/builduser -s /sbin/nologin -c "Docker image user" builduser
+    useradd -u 1000 -r -g buildusers -d /home/builduser -s /sbin/nologin -c "Docker image user" builduser
 
 # Set the home directory to our app user's home.
 ENV HOME=/home/builduser
@@ -23,7 +23,10 @@ WORKDIR $APP_HOME
 ADD . $APP_HOME
 
 # Chown all the files to the app user.
-RUN chown -R builduser:buildusers $APP_HOME
-
+RUN chown -R builduser:buildusers $HOME
 # Change to the app user.
 USER builduser
+
+RUN dotnet help
+WORKDIR $HOME
+
