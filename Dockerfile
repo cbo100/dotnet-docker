@@ -1,4 +1,9 @@
-FROM microsoft/dotnet:2.2.103-sdk-stretch
+# This Dockerfile simply takes the base dotnet sdk image and adds a UID/GID 1000 to it
+# Required such that the non-root builds will work on Jenkins
+
+ARG DOTNET_VERSION=2.1.503-sdk-stretch
+
+FROM microsoft/dotnet:${DOTNET_VERSION}
 
 # Create the home directory for the new app user.
 RUN mkdir -p /home/builduser
